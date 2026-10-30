@@ -1,0 +1,6 @@
+<Project>
+  <!-- Keep machine-specific checkout paths out of release binaries and symbols. -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release' and '$(PathMap)' == ''">
+    <PathMap>$(MSBuildThisFileDirectory)=/_/SLCopilot/</PathMap>
+  </PropertyGroup>
+</Project>

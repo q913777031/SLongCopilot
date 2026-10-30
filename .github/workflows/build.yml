@@ -1,0 +1,31 @@
+name: Build and test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: microsoft/setup-msbuild@v2
+      # VSIX 打包（VSSDK）需要完整 MSBuild；测试仍用 dotnet test（Windows 上同时运行 net8.0 与 net472）。
+      - run: msbuild SLCopilot.sln /restore /p:Configuration=Release /p:TreatWarningsAsErrors=true /m
+      - run: ./scripts/Test-Vsix.ps1 -Path src/SLCopilot/bin/Release/net472/SLCopilot.vsix
+      - run: dotnet test tests/SLCopilot.Core.Tests/SLCopilot.Core.Tests.csproj -c Release --logger trx --results-directory TestResults
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SLCopilot-vsix
+          path: src/SLCopilot/bin/Release/net472/SLCopilot.vsix
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults/*.trx
