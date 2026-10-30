@@ -10,6 +10,8 @@ SLongCopilot（Visual Studio 扩展名为 **SLCopilot**）是面向 **Visual Stu
 
 项目目前为 **0.8.0 预览版**，采用 [MIT 许可证](LICENSE)。使用模型服务需要你自己的 API 密钥，调用费用由对应服务商收取。
 
+**下载：** [Windows 安装包（VSIX）](https://github.com/q913777031/SLongCopilot/releases/download/v0.8.0/SLongCopilot-0.8.0.vsix) · [发布说明与校验文件](https://github.com/q913777031/SLongCopilot/releases/tag/v0.8.0)
+
 ## 核心功能
 
 | 功能 | 说明 |
@@ -54,8 +56,8 @@ SLongCopilot（Visual Studio 扩展名为 **SLCopilot**）是面向 **Visual Stu
 
 ### 安装扩展
 
-1. 在仓库的 **Actions → Build and test** 中选择成功的构建，下载 `SLCopilot-vsix` artifact；也可以按下方开发步骤自行生成安装包。Artifact 仅在工作流成功生成后提供。
-2. 解压下载的文件，关闭 Visual Studio，双击 `SLCopilot.vsix`，按 VSIXInstaller 提示安装。
+1. 从 [Releases](https://github.com/q913777031/SLongCopilot/releases/tag/v0.8.0) 下载 `SLongCopilot-0.8.0.vsix`。也可以从成功的 **Actions → Build and test** 构建中下载 `SLCopilot-vsix` artifact，或按下方开发步骤自行编译。
+2. 关闭 Visual Studio，双击下载的 `.vsix` 文件，按 VSIXInstaller 提示安装；如果下载的是 Actions artifact，请先解压。
 3. 重新打开 Visual Studio 和你的解决方案，从 **工具** 菜单打开 SLCopilot 聊天窗口。
 
 如果正在从旧的 0.2.x 扩展升级，请先在扩展管理器中卸载旧版；新旧扩展标识不同，可能出现重复菜单。
